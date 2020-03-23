@@ -13,6 +13,7 @@ async function initWorkout() {
       ...tallyExercises(lastWorkout.exercises)
     };
 
+    console.log(workoutSummary);
     renderWorkoutSummary(workoutSummary);
   } else {
     renderNoWorkoutText()
@@ -21,11 +22,11 @@ async function initWorkout() {
 
 function tallyExercises(exercises) {
   const tallied = exercises.reduce((acc, curr) => {
-    if (curr.type === "resistance") {
+    if (curr.workoutType === "resistance") {
       acc.totalWeight = (acc.totalWeight || 0) + curr.weight;
       acc.totalSets = (acc.totalSets || 0) + curr.sets;
       acc.totalReps = (acc.totalReps || 0) + curr.reps;
-    } else if (curr.type === "cardio") {
+    } else if (curr.workoutType === "cardio") {
       acc.totalDistance = (acc.totalDistance || 0) + curr.distance;
     }
     return acc;
